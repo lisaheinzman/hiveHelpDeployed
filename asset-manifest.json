@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.js": "/hiveHelpDeployment/static/js/main.5dbca6c4.js",
+    "static/js/732.0bc283ab.chunk.js": "/hiveHelpDeployment/static/js/732.0bc283ab.chunk.js",
+    "static/js/274.3109c029.js": "/hiveHelpDeployment/static/js/274.3109c029.js",
+    "static/media/Ionicons.ttf": "/hiveHelpDeployment/static/media/Ionicons.9b6b1954a5eb6efeaf11.ttf",
+    "static/media/SignInBackground.png": "/hiveHelpDeployment/static/media/SignInBackground.be8cb494c5f31bc5a50a.png",
+    "static/media/createAccount.png": "/hiveHelpDeployment/static/media/createAccount.4c8bf90f09564f65a8a0.png",
+    "static/media/greenBackground.png": "/hiveHelpDeployment/static/media/greenBackground.a4057aa8c140201f852d.png",
+    "static/media/AntDesign.ttf": "/hiveHelpDeployment/static/media/AntDesign.163adab9dbd7cb1ed12a.ttf",
+    "static/media/bee_icon.jpg": "/hiveHelpDeployment/static/media/bee_icon.e20a191ac944d87f6f46.jpg",
+    "static/media/bee-icon.png": "/hiveHelpDeployment/static/media/bee-icon.65d5861191863a17bf10.png",
+    "static/media/bee-fly-icon.png": "/hiveHelpDeployment/static/media/bee-fly-icon.b40f745a75c6cf876832.png",
+    "static/media/mail-icon.png": "/hiveHelpDeployment/static/media/mail-icon.3e82d8ccc6ab9a5bfdbc.png",
+    "favicon.ico": "/hiveHelpDeployment/favicon.ico",
+    "static/media/light_mode_1.png": "/hiveHelpDeployment/static/media/light_mode_1.17b7a545467aebc740f1.png",
+    "static/media/dark_mode_1.png": "/hiveHelpDeployment/static/media/dark_mode_1.0f2ad31bd4340ffa2c5a.png",
+    "static/media/light_mode_2.png": "/hiveHelpDeployment/static/media/light_mode_2.ab1fa6068fef7b8defc1.png",
+    "static/media/dark_mode_2.png": "/hiveHelpDeployment/static/media/dark_mode_2.cc945122d8fae8e4fde8.png",
+    "static/media/profile-icon.png": "/hiveHelpDeployment/static/media/profile-icon.5a1da518ed6134105afa.png",
+    "index.html": "/hiveHelpDeployment/index.html",
+    "static/media/calendar-icon.png": "/hiveHelpDeployment/static/media/calendar-icon.c9d4e343be4df18bcf64.png",
+    "static/media/home-icon.png": "/hiveHelpDeployment/static/media/home-icon.34facf712be6af3b429e.png",
+    "static/media/tasks-icon.png": "/hiveHelpDeployment/static/media/tasks-icon.4337ba7846493c803311.png",
+    "favicon-32.png": "/hiveHelpDeployment/favicon-32.png",
+    "static/media/guides-icon.png": "/hiveHelpDeployment/static/media/guides-icon.e9933b036571c1321bb0.png",
+    "favicon-16.png": "/hiveHelpDeployment/favicon-16.png",
+    "manifest.json": "/hiveHelpDeployment/manifest.json",
+    "serve.json": "/hiveHelpDeployment/serve.json",
+    "main.5dbca6c4.js.map": "/hiveHelpDeployment/static/js/main.5dbca6c4.js.map",
+    "732.0bc283ab.chunk.js.map": "/hiveHelpDeployment/static/js/732.0bc283ab.chunk.js.map",
+    "274.3109c029.js.map": "/hiveHelpDeployment/static/js/274.3109c029.js.map"
+  },
+  "entrypoints": [
+    "static/js/274.3109c029.js",
+    "static/js/main.5dbca6c4.js"
+  ]
+}
