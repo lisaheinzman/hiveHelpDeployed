@@ -24,18 +24,8 @@ const SignInScreen = () => {
 
   async function handleSubmit() {
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
-    if (error) {
-      alert(error.message, error.status);
-      console.log(error.message, error.status);
-    }
-    setLoading(false);
-    if (!error) {
-      goToHomePage();
-    }
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    goToHomePage();
   }
 
   // Navigation

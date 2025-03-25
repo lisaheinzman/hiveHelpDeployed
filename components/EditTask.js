@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import { Theme } from './Theme.js';
-import { useTheme } from './ThemeProvider.js';
-import { supabase } from '../supabase'; 
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+import { Theme } from "./Theme.js";
+import { useTheme } from "./ThemeProvider.js";
+import { supabase } from "../supabase";
 
 const EditTask = ({ route, navigation }) => {
   const { colorScheme } = useTheme();
@@ -12,45 +18,48 @@ const EditTask = ({ route, navigation }) => {
   const [description, setDescription] = useState(task.description);
   const [dueDate, setDueDate] = useState(task.dueDate);
 
-  const handleUpdate = async () => {
-    const updatedTask = { name, description, dueDate };
+  const handleUpdate = () => {
+    // Create the updated task object
+    const updatedTask = { ...task, name, description, dueDate };
 
     try {
-      const { data, error } = await supabase
-        .from('tasks')
-        .update(updatedTask)
-        .eq('id', task.id);
-
-      if (error) {
-        throw error;
+      if (updateTaskInList) {
+        updateTaskInList(updatedTask); // Update the parent component's state
       }
-
-      // Assuming the response data includes the updated task, use it to update the UI optimistically
-      if (updateTaskInList && data && data.length > 0) {
-        updateTaskInList(data[0]); // Update the parent component's state with the updated task
-      }
-
       navigation.goBack(); // Navigate back after successful update
     } catch (error) {
-      console.error('Error updating task:', error.message);
-      // Optionally, show an error message to the user
-      Alert.alert('Error', 'Failed to update task. Please try again.');
+      console.error("Error updating task:", error.message);
+      console.log("Updated task list:", task);
+      console.error("Error", "Failed to update task. Please try again.");
     }
   };
 
-
   return (
-    <View style={[styles.container, {backgroundColor: colorScheme.background}]}>
-      <Text style={[styles.label, { color: colorScheme.text }]}>Task Name:</Text>
+    <View
+      style={[styles.container, { backgroundColor: colorScheme.background }]}
+    >
+      <Text style={[styles.label, { color: colorScheme.text }]}>
+        Task Name:
+      </Text>
       <TextInput
-        style={[styles.input, { borderColor: colorScheme.secondary }, {color: colorScheme.text}]}
+        style={[
+          styles.input,
+          { borderColor: colorScheme.secondary },
+          { color: colorScheme.text },
+        ]}
         value={name}
         onChangeText={setName}
         placeholder="Enter task name"
       />
-      <Text style={[styles.label, { color: colorScheme.text }]}>Description:</Text>
+      <Text style={[styles.label, { color: colorScheme.text }]}>
+        Description:
+      </Text>
       <TextInput
-        style={[styles.input, { height: 100, borderColor: colorScheme.secondary }, {color: colorScheme.text}]} 
+        style={[
+          styles.input,
+          { height: 100, borderColor: colorScheme.secondary },
+          { color: colorScheme.text },
+        ]}
         value={description}
         onChangeText={setDescription}
         placeholder="Enter task description"
@@ -58,13 +67,22 @@ const EditTask = ({ route, navigation }) => {
       />
       <Text style={[styles.label, { color: colorScheme.text }]}>Due Date:</Text>
       <TextInput
-        style={[styles.input, { borderColor: colorScheme.secondary }, {color: colorScheme.text}]}
+        style={[
+          styles.input,
+          { borderColor: colorScheme.secondary },
+          { color: colorScheme.text },
+        ]}
         value={dueDate}
         onChangeText={setDueDate}
         placeholder="Enter due date"
       />
-      <TouchableOpacity style={[styles.button, { backgroundColor: colorScheme.primary }]} onPress={handleUpdate}>
-        <Text style={[styles.buttonText, { color: colorScheme.text }]}>Update Task</Text>
+      <TouchableOpacity
+        style={[styles.button, { backgroundColor: colorScheme.primary }]}
+        onPress={handleUpdate}
+      >
+        <Text style={[styles.buttonText, { color: colorScheme.text }]}>
+          Update Task
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -76,27 +94,27 @@ const styles = StyleSheet.create({
     padding: 50,
   },
   label: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 8,
-    marginTop:40,
+    marginTop: 40,
   },
   input: {
     borderWidth: 1,
     borderRadius: 8,
     padding: 10,
     //marginBottom: 20,
-    color: Theme.lightA.text, 
-    marginTop:20,
+    color: Theme.lightA.text,
+    marginTop: 20,
   },
   button: {
     paddingVertical: 12,
     borderRadius: 8,
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 20,
   },
   buttonText: {
-    color: 'white',
-    fontWeight: 'bold',
+    color: "white",
+    fontWeight: "bold",
   },
 });
 

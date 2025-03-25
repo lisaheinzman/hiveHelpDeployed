@@ -8,9 +8,9 @@ import {
   TextInput,
 } from "react-native";
 import { Calendar } from "react-native-calendars";
-import { supabase } from "../supabase";
 import { AntDesign } from "@expo/vector-icons";
 import { useTheme } from "./ThemeProvider.js";
+import eventData from "./EventList.json";
 
 const CalendarScreen = ({ user_id }) => {
   // Accept user_id as a prop
@@ -21,7 +21,6 @@ const CalendarScreen = ({ user_id }) => {
 
   const [showModal, setShowModal] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
-
   const [events, setEvents] = useState([]);
   const [showAddEvent, setShowAddEvent] = useState(false);
   const [newEventTitle, setNewEventTitle] = useState("");
@@ -43,89 +42,28 @@ const CalendarScreen = ({ user_id }) => {
   ];
 
   // Event details for different fixed dates
-  const eventDetailsJSON = [
-    {
-      title: "Today",
-      dateString: [currentDate],
-      description: "Have a wonderful day!!",
-      time: "12:00 AM",
-    },
-    {
-      title: "Special Event",
-      dateString: "2024-05-04",
-      description: "This is a special event on February 4th.",
-      time: "11:00 AM",
-    },
-    {
-      title: "Sister's Birthday",
-      dateString: "2024-02-06",
-      description: "Bring cake and flowers",
-      time: "4:00 PM",
-    },
-  ];
-
-  const [user, setUser] = useState(null);
-
-  // gets user info
-  useEffect(() => {
-    const fetchUser = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      const { data: profile, error: profileError } = await supabase
-        .from("profiles")
-        .select("name")
-        .eq("id", user.id)
-        .single();
-
-      if (profileError) {
-        console.error("Error fetching user profile:", profileError.message);
-        return;
-      }
-
-      setUser(profile);
-    };
-
-    fetchUser();
-  });
 
   useEffect(() => {
-    fetchEvents();
+    setEvents(eventData.events);
   }, []);
-
-  const fetchEvents = async () => {
-    try {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      const currentID = user.id;
-      const { data, error } = await supabase
-        .from("events")
-        .select("*")
-        .eq("user_id", currentID);
-      if (error) {
-        throw error;
-      }
-      setEvents(data);
-    } catch (error) {
-      console.error("Error fetching tasks:", error.message);
-    }
-  };
 
   // Marked dates with event details
 
   const setMarkedDatesAndEvents = async () => {
     const markedDatesObj = {};
     events.forEach((event) => {
-      markedDatesObj[event.dateString] = {
-        marked: true,
-        dotColor: colorScheme.primaryRich,
-        details: event,
-      };
+      const dates = Array.isArray(event.dateString)
+        ? event.dateString
+        : [event.dateString];
+      dates.forEach((date) => {
+        markedDatesObj[date] = {
+          marked: true,
+          dotColor: colorScheme.primaryRich,
+          details: event,
+        };
+      });
     });
     setMarkedDates(markedDatesObj);
-    setEvents(events);
   };
   useEffect(() => {
     if (events.length > 0) {
@@ -135,51 +73,43 @@ const CalendarScreen = ({ user_id }) => {
 
   const addEventToDatabase = async (event) => {
     try {
-      const { data, error } = await supabase.from("events").insert([
-        {
-          title: newEventTitle,
-          description: newEventDescription,
-          dateString: newEventDate,
-          time: newEventTime,
-          dotColor: newEventDotColor,
-          // Link event to the user's UUID
-        },
-      ]);
+      // Create a new event object
+      const newEvent = {
+        title: newEventTitle,
+        description: newEventDescription,
+        dateString: newEventDate,
+        time: newEventTime,
+        dotColor: newEventDotColor,
+      };
 
-      if (error) {
-        throw error;
-      }
-      fetchEvents();
-      const newEvent = data[0];
-      console.log(newEvent);
-      setEvents(...events, newEvent);
-      // Update marked dates immediately after adding the event
-      setMarkedDatesAndEvents();
+      // Add the new event to the events array
+      setEvents((prevEvents) => [...prevEvents, newEvent]);
+
+      // Update marked dates immediately
+      const updatedMarkedDates = { ...markedDates };
+      const dates = Array.isArray(newEvent.dateString)
+        ? newEvent.dateString
+        : [newEvent.dateString];
+      dates.forEach((date) => {
+        updatedMarkedDates[date] = {
+          marked: true,
+          dotColor: newEvent.dotColor,
+          details: newEvent,
+        };
+      });
+      setMarkedDates(updatedMarkedDates);
+
+      // Clear input fields and close the add event modal
       setNewEventTitle("");
       setNewEventDescription("");
       setNewEventDate("");
       setNewEventTime("");
       setShowAddEvent(false);
-
-      console.log("Event added to Supabase:", events);
+      console.log("Event added:", events);
       // Optionally, update the local state or perform any other action after adding the event
     } catch (error) {
-      console.error("Error adding event to Supabase:", error.message);
+      console.error("Error adding event:", error.message);
     }
-  };
-
-  // Helper function to format date as MM/DD/YYYY
-  const formatDate = (dateString) => {
-    if (!dateString) return ""; // Handle null or undefined dateString
-    const [month, year, day] = dateString.split("/"); // Adjusted splitting logic
-    return `${month.padStart(2, "0")}/${day.padStart(2, "0")}/${year}`;
-  };
-
-  // Helper function to format time as HH:MM
-  const formatTime = (timeString) => {
-    if (!timeString) return ""; // Handle null or undefined timeString
-    const [hour, minute] = timeString.split(":");
-    return `${hour.padStart(2, "0")}:${minute.padStart(2, "0")}`;
   };
 
   return (

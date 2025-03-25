@@ -3,7 +3,7 @@
     {
       "name": "Walk Dog",
       "description": "Walk my neighbors dog on 1/5.",
-      "dueDate": "01/05/2024",
+      "dueDate": "01/08/2025",
       "completed": false
     },
     {
@@ -16,13 +16,13 @@
       "name": "Car Wash",
       "description": "Take car to car wash.",
       "dueDate": "01/29/2024",
-      "completed":false
+      "completed": false
     },
     {
       "name": "Fold Clothes",
       "description": "Finished laundry, just have to fold clothes and put them away.",
       "dueDate": "01/28/2023",
-     "completed": true
+      "completed": true
     },
     {
       "name": "Call Mom",

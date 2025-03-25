@@ -12,6 +12,7 @@ import { useTheme } from "./ThemeProvider";
 import { eventDetailsJSON } from "./eventDetailsJSON";
 import { TasksScreen } from "./TasksScreen";
 import { Calendar } from "react-native-calendars";
+import tasksData from "./TaskList.json";
 import { supabase } from "../supabase";
 
 const HomeScreen = () => {
@@ -22,27 +23,8 @@ const HomeScreen = () => {
 
   // Sets current user
   useEffect(() => {
-    const fetchUser = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-
-      const { data: profile, error: profileError } = await supabase
-        .from("profiles")
-        .select("name")
-        .eq("id", user.id)
-        .single();
-
-      if (profileError) {
-        console.error("Error fetching user profile:", profileError.message);
-        return;
-      }
-
-      setUser(profile);
-    };
-
-    fetchUser();
-  });
+    setTasks(tasksData.tasks);
+  }, []);
 
   const [tasks, setTasks] = useState([]);
   const [showCompletedTasks, setShowCompletedTasks] = useState(false);
