@@ -16,7 +16,6 @@ import { useNavigation } from "@react-navigation/native"; // Import useNavigatio
 import { personalData } from "./PersonalGuidesData";
 import { Theme } from "./Theme";
 import { useTheme } from "./ThemeProvider";
-import { supabase } from "../supabase";
 
 const Personal = () => {
   const { colorScheme } = useTheme();
@@ -39,8 +38,6 @@ const Personal = () => {
     setModalVisible(false);
     setSelectedItem(null);
   };
-  const user = supabase.auth.getUser();
-
   // returns list content os selected title
   const renderSections = (sections) => {
     return (

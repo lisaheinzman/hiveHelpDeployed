@@ -21,9 +21,7 @@ import HomeScreen from "./components/HomeScreen";
 import CalendarScreen from "./components/CalendarScreen";
 import DateDetailsScreen from "./components/DateDetailsScreen";
 
-import ProfileScreen from "./components/ProfileScreen";
 import SettingsScreen from "./components/SettingsScreen";
-import FavoriteGuidesScreen from "./components/FavoriteGuidesScreen";
 import RecentGuidesScreen from "./components/RecentScreen";
 
 import SignInScreen from "./components/SignInScreen";
@@ -70,10 +68,6 @@ const App = () => {
         <Stack.Screen name="School Guides" component={schoolGuides} />
         <Stack.Screen name="Work Guides" component={workGuides} />
         <Stack.Screen name="Personal Guides" component={personalGuides} />
-        <Stack.Screen
-          name="Favorited Guides"
-          component={FavoriteGuidesScreen}
-        />
       </Stack.Navigator>
     );
   };
@@ -122,9 +116,7 @@ const App = () => {
         initialRouteName="Profile"
         screenOptions={{ headerShown: false }}
       >
-        <Stack.Screen name="Profile" component={ProfileScreen} />
         <Stack.Screen name="Settings" component={SettingsScreen} />
-        <Stack.Screen name="FavoriteGuides" component={FavoriteGuidesScreen} />
         <Stack.Screen name="RecentGuides" component={RecentGuidesScreen} />
       </Stack.Navigator>
     );

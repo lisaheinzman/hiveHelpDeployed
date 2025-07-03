@@ -14,8 +14,6 @@ import { useState } from "react";
 
 import { Alert } from "react-native";
 
-import { supabase } from "../supabase";
-
 // Navigation
 const CreateAccountScreen = () => {
   const navigation = useNavigation();
@@ -112,19 +110,6 @@ const CreateAccountScreen = () => {
     } else {
       setConfirmPasswordError("");
     }
-
-    const {
-      data: { session },
-      error,
-    } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-      options: {
-        data: {
-          name: name,
-        },
-      },
-    });
 
     if (error) {
       alert(error.message, error.status);

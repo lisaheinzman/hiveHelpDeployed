@@ -9,7 +9,6 @@ import {
   Dimensions,
 } from "react-native";
 import { useTheme } from "./ThemeProvider.js";
-import { supabase } from "../supabase"; // Ensure you import supabase correctly
 
 const TaskDetailsScreen = ({ route, navigation }) => {
   const { task } = route.params;
@@ -36,14 +35,13 @@ const TaskDetailsScreen = ({ route, navigation }) => {
     );
   };
 
-  const handleDeleteTask = async () => {
+  const handleDeleteTask = (taskName) => {
     try {
-      const { error } = await supabase
-        .from("tasks")
-        .delete()
-        .match({ id: updatedTask.id });
+      // Filter out the task to be deleted
+      const updatedTasks = task.filter((task) => task.name !== taskName);
 
-      if (error) throw error;
+      // Update the state (assuming you're using useState)
+      setUpdatedTask(updatedTasks);
 
       Alert.alert("Task Deleted", "The task has been successfully deleted.", [
         { text: "OK", onPress: () => navigation.goBack() },

@@ -276,47 +276,72 @@ const CalendarScreen = ({ user_id }) => {
           setShowModal(false);
         }}
       >
-        <View style={[styles.eventDetails]}>
-          <Text
+        <View style={styles.modalContainer}>
+          <View
             style={[
-              styles.eventHeading,
-              { backgroundColor: colorScheme.primary },
+              styles.background,
+              { backgroundColor: colorScheme.primaryRich },
             ]}
           >
-            {markedDates[selectedDate]?.details?.title}
-          </Text>
-          <Text style={styles.subheading}>Notes</Text>
-          <Text>{markedDates[selectedDate]?.details?.description}</Text>
-          <Text style={styles.subheading}>Date</Text>
-          <Text> {markedDates[selectedDate]?.details?.dateString}</Text>
-          <Text style={styles.subheading}>Time</Text>
-          <Text> {markedDates[selectedDate]?.details?.time}</Text>
+            <View
+              style={[
+                styles.bottomBackground,
+                { backgroundColor: colorScheme.background },
+              ]}
+            />
+          </View>
+          <View style={[styles.eventDetails, {}]}>
+            <View
+              style={[
+                styles.eventHeadingWrapper,
+                { backgroundColor: colorScheme.primary },
+              ]}
+            >
+              <Text style={[styles.eventHeading, { color: colorScheme.text }]}>
+                {markedDates[selectedDate]?.details?.title}
+              </Text>
+            </View>
+            <Text style={[styles.subheading, { color: colorScheme.text }]}>
+              Notes
+            </Text>
+            <Text style={styles.subheadingData}>
+              {markedDates[selectedDate]?.details?.description}
+            </Text>
+            <Text style={styles.subheading}>Date</Text>
+            <Text style={styles.subheadingData}>
+              {markedDates[selectedDate]?.details?.dateString}
+            </Text>
+            <Text style={styles.subheading}>Time</Text>
+            <Text style={styles.subheadingData}>
+              {markedDates[selectedDate]?.details?.time}
+            </Text>
 
-          <View style={styles.eventButtons}>
-            <TouchableOpacity
-              onPress={() => setShowModal(false)}
-              style={[
-                styles.backButton,
-                { backgroundColor: colorScheme.tertiary },
-                { borderBottomWidth: 5 },
-                { borderRightWidth: 5 },
-                { borderColor: colorScheme.tertiaryRich },
-                { marginRight: "50%" },
-              ]}
-            >
-              <Text>Back</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.addButton,
-                { backgroundColor: colorScheme.tertiary },
-                { borderBottomWidth: 5 },
-                { borderRightWidth: 5 },
-                { borderColor: colorScheme.tertiaryRich },
-              ]}
-            >
-              <Text>Edit</Text>
-            </TouchableOpacity>
+            <View style={styles.eventButtons}>
+              <TouchableOpacity
+                onPress={() => setShowModal(false)}
+                style={[
+                  styles.backButton,
+                  { backgroundColor: colorScheme.tertiary },
+                  { borderBottomWidth: 5 },
+                  { borderRightWidth: 5 },
+                  { borderColor: colorScheme.tertiaryRich },
+                  { marginRight: "50%" },
+                ]}
+              >
+                <Text>Back</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.addButton,
+                  { backgroundColor: colorScheme.tertiary },
+                  { borderBottomWidth: 5 },
+                  { borderRightWidth: 5 },
+                  { borderColor: colorScheme.tertiaryRich },
+                ]}
+              >
+                <Text>Edit</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </Modal>
@@ -333,7 +358,6 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: "row",
     justifyContent: "space-between",
-    textAlign: "center",
     width: "100%",
     paddingTop: 50,
     paddingBottom: 20,
@@ -342,11 +366,6 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 30,
     paddingBottom: 10,
-  },
-  subheading: {
-    fontSize: 18,
-    fontWeight: "bold",
-    margin: 5,
   },
   plusButton: {
     width: 50,
@@ -389,16 +408,17 @@ const styles = StyleSheet.create({
     left: 14,
   },
   Calendar: {
-    borderStyle: "solid",
-    borderWidth: 1,
-    marginTop: -15,
-    borderRadius: 20, // To round the corners
-    overflow: "hidden", // Clip the content to the rounded corners
+    transform: "scale(1.45)",
+    transformOrigin: "top center",
+    marginTop: 20,
+    width: "fit-content",
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    border: "1px solid #ccc",
   },
   addEventSection: {
-    padding: 200,
+    padding: 100,
     paddingHorizontal: 50,
-
     align: "center",
   },
   textInput: {
@@ -425,19 +445,38 @@ const styles = StyleSheet.create({
   eventButtons: {
     flexDirection: "row",
     justifyContent: "space-between",
+    paddingTop: "20%",
   },
   eventDetails: {
     flex: 1,
-    marginTop: "100%",
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 1,
+    paddingTop: "20%",
+  },
+  eventHeadingWrapper: {
+    position: "absolute",
+    top: 65,
+    left: 20,
+    width: "90%",
+    borderRadius: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 25,
   },
   eventHeading: {
-    marginTop: 10,
-    marginBottom: 10,
-    padding: 15,
     fontSize: 30,
+    textAlign: "center",
+  },
+  subheading: {
+    fontSize: 18,
+    fontWeight: "bold",
+    margin: 5,
+    alignSelf: "flex-start",
+    paddingLeft: "10%",
+  },
+  subheadingData: {
+    alignSelf: "flex-start",
+    paddingLeft: "30%",
+    marginBottom: 20,
   },
   colorOptionsContainer: {
     flexDirection: "row",
@@ -450,6 +489,25 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginHorizontal: 5,
     borderWidth: 2,
+  },
+  modalContainer: {
+    flex: 1,
+    position: "relative",
+  },
+  background: {
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    zIndex: -1, // Push the background views behind the content
+  },
+  bottomBackground: {
+    borderRadius: 20,
+    width: "100%",
+    paddingVertical: 500,
+    position: "absolute",
+    top: 100,
   },
 });
 

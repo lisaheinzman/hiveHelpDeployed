@@ -10,11 +10,9 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import BackgroundImage from "../assets/SignInBackground.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { Alert } from "react-native";
-
-import { supabase } from "../supabase";
 
 const SignInScreen = () => {
   const navigation = useNavigation();
@@ -27,6 +25,13 @@ const SignInScreen = () => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     goToHomePage();
   }
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      handleSubmit();
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   // Navigation
   const goToHomePage = () => {

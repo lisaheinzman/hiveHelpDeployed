@@ -2,25 +2,25 @@
   "events": [
     {
       "title": "Today",
-      "dateString": "2025-01-04",
+      "dateString": "2025-07-04",
       "description": "Have a wonderful day!!",
       "time": "12:00 AM"
     },
     {
       "title": "Special Event",
-      "dateString": "2025-01-08",
+      "dateString": "2025-08-08",
       "description": "This is a special event!",
       "time": "11:00 AM"
     },
     {
       "title": "Sister's Birthday",
-      "dateString": "2025-01-06",
+      "dateString": "2025-09-06",
       "description": "Bring cake and flowers",
       "time": "4:00 PM"
     },
     {
       "title": "Brother's Birthday",
-      "dateString": "2025-02-06",
+      "dateString": "2025-10-06",
       "description": "Bring cake and flowers",
       "time": "4:00 PM"
     }

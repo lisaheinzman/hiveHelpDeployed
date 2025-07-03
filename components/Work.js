@@ -15,7 +15,6 @@ import { useNavigation } from "@react-navigation/native"; // Import useNavigatio
 import { workData } from "./WorkGuidesData";
 import { Theme } from "./Theme";
 import { useTheme } from "./ThemeProvider";
-import { supabase } from "../supabase";
 
 const WorkGuides = () => {
   const { colorScheme } = useTheme();
@@ -38,7 +37,6 @@ const WorkGuides = () => {
     setModalVisible(false);
     setSelectedItem(null);
   };
-  const user = supabase.auth.getUser();
 
   // returns list content os selected title
   const renderSections = (sections) => {
@@ -184,12 +182,14 @@ const styles = StyleSheet.create({
   },
   column: {
     flex: 1,
+    justifyContent: "flex-start", // Align items to the start, reducing spread
+    alignItems: "center", // Align items horizontally to the center
+    gap: 8,
   },
   secondColumn: {
     paddingTop: "20%", // Padded at the top by 20%
   },
   itemContainer: {
-    marginVertical: 5,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -220,6 +220,7 @@ const styles = StyleSheet.create({
   heading: {
     fontSize: 30,
     fontWeight: "bold",
+    marginBottom: 10,
   },
   /* Modal Styles */
   modalContainer: {
@@ -234,9 +235,11 @@ const styles = StyleSheet.create({
     width: "100%",
     maxHeight: "100%",
   },
-  scrollContainer: {
-    flex: 1,
-    width: "100%",
+  scrollContent: {
+    flexGrow: 1,
+    overflow: "auto", // Enable scrolling on web and mobile
+    padding: 10,
+    height: "100%", // Ensure it fits the parent container
   },
   title: {
     fontSize: 25,

@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import { Theme } from "./Theme.js";
 import { useTheme } from "./ThemeProvider.js";
-import { supabase } from "../supabase";
 
 const EditTask = ({ route, navigation }) => {
   const { colorScheme } = useTheme();
