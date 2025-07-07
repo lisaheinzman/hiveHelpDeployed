@@ -13,8 +13,6 @@ import {
 import { useNavigation } from "@react-navigation/core";
 import profilePicture from "../assets/bee_icon.jpg";
 
-import { supabase } from "../supabase";
-
 import lightMode1 from "../assets/light_mode_1.png";
 import lightMode2 from "../assets/light_mode_2.png";
 import darkMode1 from "../assets/dark_mode_1.png";
@@ -48,32 +46,11 @@ const SettingsScreen = () => {
   const [selectedColorModeImage, setSelectedColorModeImage] = useState(null);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
-        setCurrentUser(user);
-      } catch (error) {
-        console.error("Error fetching user:", error.message);
-      }
-    };
+    const fetchUser = async () => {};
     fetchUser();
   }, []);
 
-  const openUpdateEmailModal = async () => {
-    try {
-      const { data: user, error } = await supabase.auth.getUser();
-      if (error) {
-        console.error("Error fetching user:", error.message);
-        return;
-      }
-      setNewEmail(currentUser.email);
-      setUpdateEmailModalVisible(true);
-    } catch (error) {
-      console.error("Error fetching user:", error.message);
-    }
-  };
+  const openUpdateEmailModal = async () => {};
 
   const closeUpdateEmailModal = () => {
     setUpdateEmailModalVisible(false);
@@ -106,58 +83,12 @@ const SettingsScreen = () => {
     setColorThemeModalVisible(false);
   };
 
-  const handleDeleteAccount = async () => {
-    try {
-      const user = supabase.auth.getUser();
+  const handleDeleteAccount = async () => {};
 
-      if (!user || !password) {
-        console.error("Invalid user or password");
-        return;
-      }
-      const userId = currentUser.id;
-      await supabase.auth.admin.deleteUser(userId); // Pass user ID, options, and password
-      setDeleteAccountModalVisible(false);
-      navigation.navigate("SignIn");
-    } catch (error) {
-      console.error("Error deleting account", error.message);
-    }
-  };
-
-  const handleUpdatePassword = async () => {
-    try {
-      if (isValidPassword) {
-        console.log("New Password:", newPassword);
-        await supabase.auth.updateUser({
-          password: newPassword,
-        });
-        console.log("Password updated successfully");
-        closeUpdatePasswordModal();
-      }
-    } catch (error) {
-      console.error("Error updating password:", error.message);
-    }
-  };
+  const handleUpdatePassword = async () => {};
 
   const handleUpdateEmail = async () => {
-    try {
-      alert(
-        "To change your email, confirm the change from your new email. The change will not be saved if the email is not confirmed."
-      );
-      // console.log(error.message, error.status)
-
-      console.log("New Email:", newEmail);
-      await supabase.auth.updateUser({
-        email: newEmail,
-      });
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      setCurrentUser(user); // Update currentUser state with the new user data
-      console.log("Email updated successfully: ", user.email);
-      closeUpdateEmailModal();
-    } catch (error) {
-      console.error("Error updating email:", error.message);
-    }
+    console.log("handleUpdateEmail was called — no action taken.");
   };
 
   const handleColorThemeChange = (theme) => {

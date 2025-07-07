@@ -37,9 +37,7 @@ const EditTask = ({ route, navigation }) => {
     <View
       style={[styles.container, { backgroundColor: colorScheme.background }]}
     >
-      <Text style={[styles.label, { color: colorScheme.text }]}>
-        Task Name:
-      </Text>
+      <Text style={[styles.label, { color: colorScheme.text }]}>Task Name</Text>
       <TextInput
         style={[
           styles.input,
@@ -51,7 +49,7 @@ const EditTask = ({ route, navigation }) => {
         placeholder="Enter task name"
       />
       <Text style={[styles.label, { color: colorScheme.text }]}>
-        Description:
+        Description
       </Text>
       <TextInput
         style={[
@@ -64,7 +62,7 @@ const EditTask = ({ route, navigation }) => {
         placeholder="Enter task description"
         multiline={true}
       />
-      <Text style={[styles.label, { color: colorScheme.text }]}>Due Date:</Text>
+      <Text style={[styles.label, { color: colorScheme.text }]}>Due Date</Text>
       <TextInput
         style={[
           styles.input,
@@ -75,14 +73,32 @@ const EditTask = ({ route, navigation }) => {
         onChangeText={setDueDate}
         placeholder="Enter due date"
       />
-      <TouchableOpacity
-        style={[styles.button, { backgroundColor: colorScheme.primary }]}
-        onPress={handleUpdate}
-      >
-        <Text style={[styles.buttonText, { color: colorScheme.text }]}>
-          Update Task
-        </Text>
-      </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            { backgroundColor: colorScheme.primary },
+            { borderColor: colorScheme.primaryRich },
+          ]}
+          onPress={handleUpdate}
+        >
+          <Text style={[styles.buttonText, { color: colorScheme.text }]}>
+            Cancel
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.button,
+            { backgroundColor: colorScheme.primary },
+            { borderColor: colorScheme.primaryRich },
+          ]}
+          onPress={handleUpdate}
+        >
+          <Text style={[styles.buttonText, { color: colorScheme.text }]}>
+            Update
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -90,9 +106,11 @@ const EditTask = ({ route, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 50,
+    paddingTop: 50,
   },
   label: {
+    paddingLeft: "10%",
+    fontSize: 25,
     fontWeight: "bold",
     marginBottom: 8,
     marginTop: 40,
@@ -101,15 +119,23 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 8,
     padding: 10,
-    //marginBottom: 20,
-    color: Theme.lightA.text,
-    marginTop: 20,
+    marginBottom: 10,
+    marginHorizontal: "10%",
+  },
+  buttonContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingTop: "10%",
   },
   button: {
-    paddingVertical: 12,
-    borderRadius: 8,
+    padding: 10,
+    borderRadius: 10,
     alignItems: "center",
-    marginTop: 20,
+    alignSelf: "center",
+    borderBottomWidth: 5,
+    borderRightWidth: 5,
+    width: "30%",
   },
   buttonText: {
     color: "white",

@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TextInput,
   Alert,
+  Modal,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -96,47 +97,76 @@ const TasksScreen = () => {
           />
         </TouchableOpacity>
       </View>
-
-      {showAddTask && (
-        <View style={styles.addTaskSection}>
-          <Text style={[styles.sectionTitle, { color: colorScheme.text }]}>
-            Add Task
+      <Modal
+        style={[{ backgroundColor: colorScheme.background }]}
+        visible={showAddTask}
+        animationType="slide"
+        transparent={false} // full screen mode
+        onRequestClose={() => setShowAddTask(false)}
+      >
+        <View
+          style={[
+            styles.modalContainer,
+            { backgroundColor: colorScheme.background },
+          ]}
+        >
+          <Text style={[styles.inputLabel, { color: colorScheme.text }]}>
+            Task Name
           </Text>
           <TextInput
             style={[styles.input, { color: colorScheme.text }]}
-            placeholder="Task Name"
+            placeholderTextColor={colorScheme.placeholder}
             value={newTaskName}
             onChangeText={setNewTaskName}
           />
+          <Text style={[styles.inputLabel, { color: colorScheme.text }]}>
+            Description
+          </Text>
           <TextInput
-            style={[styles.input, { color: colorScheme.text }]}
-            placeholder="Task Description"
+            style={[styles.largeInput, { color: colorScheme.text }]}
+            placeholderTextColor={colorScheme.placeholder}
+            multiline={true}
             value={newTaskDescription}
             onChangeText={setNewTaskDescription}
           />
+          <Text style={[styles.inputLabel, { color: colorScheme.text }]}>
+            Due Date
+          </Text>
           <TextInput
             style={[styles.input, { color: colorScheme.text }]}
-            placeholder="Due Date (YYYY-MM-DD)"
+            placeholder="YYYY-MM-DD"
+            placeholderTextColor={colorScheme.placeholder}
             value={newTaskDueDate}
             onChangeText={setNewTaskDueDate}
           />
-          <TouchableOpacity
-            style={[
-              styles.addButton,
-              { backgroundColor: colorScheme.primary },
-              { color: colorScheme.text },
-              { borderBottomWidth: 5 },
-              { borderRightWidth: 5 },
-              { borderColor: colorScheme.primaryRich },
-            ]}
-            onPress={addTask}
-          >
-            <Text style={[styles.addButtonText, { color: colorScheme.text }]}>
-              Add
-            </Text>
-          </TouchableOpacity>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={[
+                styles.button,
+                { backgroundColor: colorScheme.primary },
+                { borderColor: colorScheme.primaryRich },
+              ]}
+              onPress={() => setShowAddTask(false)}
+            >
+              <Text style={[styles.buttonText, { color: colorScheme.text }]}>
+                Cancel
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.button,
+                { backgroundColor: colorScheme.primary },
+                { borderColor: colorScheme.primaryRich },
+              ]}
+              onPress={addTask}
+            >
+              <Text style={[styles.buttonText, { color: colorScheme.text }]}>
+                Add
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      )}
+      </Modal>
 
       <FlatList
         data={
@@ -289,15 +319,33 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 10,
     marginBottom: 10,
+    marginHorizontal: "10%",
   },
-  addButton: {
+  largeInput: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 8,
+    padding: 10,
+    paddingBottom: 30,
+    marginBottom: 10,
+    marginHorizontal: "10%",
+  },
+  buttonContainer: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    paddingTop: "10%",
+  },
+  button: {
     padding: 10,
     borderRadius: 10,
     alignItems: "center",
     alignSelf: "center",
-    width: "40%",
+    borderBottomWidth: 5,
+    borderRightWidth: 5,
+    width: "30%",
   },
-  addButtonText: {
+  buttonText: {
     fontWeight: "bold",
   },
   task: {
@@ -347,6 +395,33 @@ const styles = StyleSheet.create({
   },
   showCompletedButtonText: {
     fontWeight: "bold",
+  },
+  modalContainer: {
+    flex: 1,
+    paddingTop: 50,
+  },
+  inputLabel: {
+    paddingLeft: "10%",
+    fontSize: 25,
+    fontWeight: "bold",
+    marginBottom: 8,
+    marginTop: 40,
+  },
+  modalOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // dim background
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalContent: {
+    width: "90%",
+    padding: 20,
+    borderRadius: 15,
+    elevation: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
 });
 
