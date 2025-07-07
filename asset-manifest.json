@@ -1,9 +1,7 @@
 {
   "files": {
-    "main.js": "/hiveHelpDeployed/static/js/main.673b14c9.js",
-    "static/js/732.0bc283ab.chunk.js": "/hiveHelpDeployed/static/js/732.0bc283ab.chunk.js",
-    "static/js/274.ab858cfa.js": "/hiveHelpDeployed/static/js/274.ab858cfa.js",
-    "static/media/Ionicons.ttf": "/hiveHelpDeployed/static/media/Ionicons.9b6b1954a5eb6efeaf11.ttf",
+    "main.js": "/hiveHelpDeployed/static/js/main.e70c4ffe.js",
+    "static/js/948.acd875a0.js": "/hiveHelpDeployed/static/js/948.acd875a0.js",
     "static/media/SignInBackground.png": "/hiveHelpDeployed/static/media/SignInBackground.be8cb494c5f31bc5a50a.png",
     "static/media/createAccount.png": "/hiveHelpDeployed/static/media/createAccount.4c8bf90f09564f65a8a0.png",
     "static/media/greenBackground.png": "/hiveHelpDeployed/static/media/greenBackground.a4057aa8c140201f852d.png",
@@ -27,12 +25,11 @@
     "favicon-16.png": "/hiveHelpDeployed/favicon-16.png",
     "manifest.json": "/hiveHelpDeployed/manifest.json",
     "serve.json": "/hiveHelpDeployed/serve.json",
-    "main.673b14c9.js.map": "/hiveHelpDeployed/static/js/main.673b14c9.js.map",
-    "732.0bc283ab.chunk.js.map": "/hiveHelpDeployed/static/js/732.0bc283ab.chunk.js.map",
-    "274.ab858cfa.js.map": "/hiveHelpDeployed/static/js/274.ab858cfa.js.map"
+    "main.e70c4ffe.js.map": "/hiveHelpDeployed/static/js/main.e70c4ffe.js.map",
+    "948.acd875a0.js.map": "/hiveHelpDeployed/static/js/948.acd875a0.js.map"
   },
   "entrypoints": [
-    "static/js/274.ab858cfa.js",
-    "static/js/main.673b14c9.js"
+    "static/js/948.acd875a0.js",
+    "static/js/main.e70c4ffe.js"
   ]
 }
