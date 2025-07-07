@@ -408,7 +408,6 @@ const styles = StyleSheet.create({
     left: 14,
   },
   Calendar: {
-    transform: "scale(1.45)",
     transformOrigin: "top center",
     marginTop: 20,
     width: "fit-content",
